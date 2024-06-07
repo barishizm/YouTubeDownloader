@@ -25,3 +25,17 @@ def download_youtube_video(url):
         show_download_status(f"Download successful!\nTotal time taken: {round(end_time - start_time, 3)} seconds")
     except exceptions.RegexMatchError:  # If there's an invalid link or empty link, show an error message
         show_error_message("Please enter a valid YouTube link")
+
+        # Function to show error message
+        def show_error_message(message):
+            error = CTkToplevel()
+            error.title("Error")
+            error.resizable(False, False)
+            error.geometry("300x100")
+            error.grid_rowconfigure((0, 1), weight=1)
+            error.grid_columnconfigure(0, weight=1)
+            error_label = CTkLabel(error, text=message)
+            error_label.grid(row=0, column=0, padx=20, pady=10)
+            button = CTkButton(error, text="OK", command=error.destroy)
+            button.grid(row=1, column=0, pady=10)
+            error.mainloop()
